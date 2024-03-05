@@ -8,16 +8,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class HomeController extends AbstractController
+class CategoryController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/category', name: 'app_category')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $categories = $entityManager->getRepository(Category::class)->findAll();
-
-        return $this->render('home/index.html.twig', [
+        return $this->render('category/index.html.twig', [
             'categories' => $categories,
-            'peiju' => "Hello!"
         ]);
     }
 }

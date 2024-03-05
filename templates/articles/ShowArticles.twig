@@ -5,9 +5,18 @@
 {% block body %}
 
 <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+{# Concaténation en twig #}
+
+{% if article.picture == NULL %}
+<img src="{{ asset('build/images/default.png') }}" class="card-img-top" alt="...">
+{% else %}
+<img src="{{ asset('build/images/' ~ article.picture ) }}" class="card-img-top" alt="..."> 
+{% endif %}
+
   <div class="card-body">
     <h5 class="card-title">{{article.title}}</h5>
+    {# directive #}
+    <h6 class="card-title">{{article.date|date("d-m-Y")}}</h6>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>

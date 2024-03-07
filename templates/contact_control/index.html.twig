@@ -1,11 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactControlController!{% endblock %}
+{% block title %}Hello ContactControlController!
+{% endblock %}
 
 {% form_theme contactForm 'bootstrap_5_layout.html.twig' %}
 
 {% block body %}
-    {# interpollation - traduire la valeur d'une variable dans une vue #}
-    {{ form(contactForm) }}
+	{# interpollation - traduire la valeur d'une variable dans une vue #}
 
-{% endblock %}
+	 {# je récupère en session les messages flash si j'en ai et j'itère à l'intérieur #}
+		<div class="row justify-content-center">
+            <div class="row col-md-8">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+			</div>
+		</div>
+    {# afficher les erreurs du formulaire #}
+
+	<div class="row justify-content-center">
+		<div class="row col-md-8">
+
+			{# désactiver les validations html5 par défaut #}
+			{{ form_start(contactForm, { 'attr': {'class': 'row', 'novalidate': 'novalidate'} }) }}
+
+			{# {{dump(form_errors(contactForm.firstName))}} #}
+           
+			{# {% if errors is not null  %}
+				{% for error in errors %}
+					<div class="alert alert-warning">
+						{{error.message}}
+					</div>
+				{% endfor %}
+			{% endif %} #}
+
+
+            {{ form_end(contactForm) }}
+
+			</div>
+		</div>
+	{% endblock %}

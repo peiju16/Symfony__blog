@@ -1,5 +1,14 @@
 @import "~bootstrap/scss/bootstrap";
 
+* {
+    color: black !important;
+}
+
 body {
     background-color: skyblue;
 }
+
+a {
+    text-decoration: none;
+}
+

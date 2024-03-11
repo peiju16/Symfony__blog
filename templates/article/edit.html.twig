@@ -2,10 +2,12 @@
 
 {% block title %}Edit Article{% endblock %}
 
+
 {% block body %}
     <h1>Edit Article</h1>
 
     {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('flash.html.twig') }}
 
     <a href="{{ path('app_article_index') }}">back to list</a>
 

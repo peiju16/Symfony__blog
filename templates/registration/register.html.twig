@@ -10,25 +10,47 @@
 		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 	{% endfor %}
 
+			<h1 class="ps-5">Register</h1>
 
-	<div class="row justify-content-center">
-		<div class="row col-md-8">
+			{{ include('flash.html.twig') }}
 
-			<h1>Register</h1>
-
-
-			{{ form_errors(registrationForm) }}
-
-			{{ form_start(registrationForm) }}
+			{{ form_start(registrationForm, { 'attr': {'class': 'row', 'novalidate': 'novalidate'} }) }}
+	
+		<div class="row g-3 justify-content-center p-5">
+			<div class="col-md-6">
+			{{ form_row(registrationForm.firstname) }}
+			</div>
+			<div class="col-md-6">
+			{{ form_row(registrationForm.lastname) }}
+			</div>
+			<div class="col-12">
+			{{ form_row(registrationForm.adresse) }}
+			</div>
+			<div class="col-md-4">
+			{{ form_row(registrationForm.city) }}
+			</div>
+			<div class="col-md-2">
+			{{ form_row(registrationForm.zipcode) }}
+			</div>
+			<div class="col-md-6">
+			{{ form_row(registrationForm.telephone) }}
+			</div>
+			<div class="col-md-6">
 			{{ form_row(registrationForm.email) }}
+			</div>
+			<div class="col-md-6">
 			{{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
+            label: 'Password'}) }}
+			</div>
+			<div class="col-12">
 			{{ form_row(registrationForm.agreeTerms) }}
-
-			<button type="submit" class="btn">Register</button>
+			</div>
+			<div class="col-12">
+			<button type="submit" class="btn btn-primary">Register</button>
+			</div>
+		</div>
 			{{ form_end(registrationForm) }}
 
-		</div>
-	</div>
+		
+	
 {% endblock %}

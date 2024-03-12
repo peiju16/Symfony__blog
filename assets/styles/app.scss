@@ -12,3 +12,7 @@ a {
     text-decoration: none;
 }
 
+label.required:before {
+    content: "*";
+}
+

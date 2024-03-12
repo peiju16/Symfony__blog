@@ -4,6 +4,16 @@
 
 {% block body %}
 
-{{app.user.email}}
+<div class="card w-75 mb-3">
+  <div class="card-body">
+    <h5 class="card-title">Hello {{app.user.firstname}} {{app.user.lastname}}</h5>
+    <p class="card-text">Adresse: {{app.user.adresse}}</p>
+    <p class="card-text">City: {{app.user.city}}</p>
+    <p class="card-text">Zipcode: {{app.user.zipcode}}</p>
+    <p class="card-text">Telephone: {{app.user.telephone}}</p>
+    <p class="card-text">E-mail: {{app.user.email}}</p>
+    <a href="#" class="btn btn-primary">Button</a>
+  </div>
+</div>
 
 {% endblock %}

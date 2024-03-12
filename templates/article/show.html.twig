@@ -25,8 +25,9 @@
 </div>
 
     <a href="{{ path('app_article_index') }}" class="btn btn-primary m-1" role="button">back to list</a>
-
+    {% if app.user and 'ROLE_ADMIN' in app.user.getroles() %}
     <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-primary m-1" role="button">edit</a>
+    {% endif %}
 
     {{ include('article/_delete_form.html.twig') }}
     </div>

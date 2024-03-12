@@ -1,4 +1,6 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{% form_theme articleForm 'bootstrap_5_layout.html.twig' %}
+{{ include('flash.html.twig') }}
+{{ form_start(articleForm) }}
+    {{ form_widget(articleForm) }}
+    <button class="btn btn-primary m-1">{{ button_label|default('Save') }}</button>
+{{ form_end(articleForm) }}

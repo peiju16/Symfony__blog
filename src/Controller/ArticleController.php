@@ -43,7 +43,7 @@ class ArticleController extends AbstractController
 
         return $this->render('article/new.html.twig', [
             'article' => $article,
-            'form' => $form,
+            'articleForm' => $form,
         ]);
     }
 
@@ -52,6 +52,7 @@ class ArticleController extends AbstractController
     {
         return $this->render('article/show.html.twig', [
             'article' => $article,
+           
         ]);
     }
 
@@ -74,12 +75,17 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash(
+                'success',
+                'Votre article a bien été modifié'
+            );
+
             return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('article/edit.html.twig', [
             'article' => $article,
-            'form' => $form,
+            'articleForm' => $form,
         ]);
     }
 
@@ -89,6 +95,11 @@ class ArticleController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) { //isCsrfTokenValid pour protéger les controllers à eviter être attaqué
             $entityManager->remove($article);
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre article a bien été supprimé'
+            );
         }
 
         return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);

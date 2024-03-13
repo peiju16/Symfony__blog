@@ -4,7 +4,9 @@
 
 {% block body %}
 
-<div class="card w-75 mb-3">
+<h1 class="ps-5 text-center">Profile</h1>
+<div class="row justify-content-center">
+<div class="card w-50">
   <div class="card-body">
     <h5 class="card-title">Hello {{app.user.firstname}} {{app.user.lastname}}</h5>
     <p class="card-text">Adresse: {{app.user.adresse}}</p>
@@ -15,5 +17,5 @@
     <a href="#" class="btn btn-primary">Button</a>
   </div>
 </div>
-
+</div>
 {% endblock %}

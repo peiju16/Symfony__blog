@@ -5,7 +5,9 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,7 +34,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])    
-            ->add('email', TextType::class, [
+            ->add('email', EmailType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter your e-mail',
@@ -64,15 +66,17 @@ class RegistrationFormType extends AbstractType
             ->add('telephone', TextType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a city',
+                        'message' => 'Please enter your telephone number',
                     ]),
                 ],
             ])   
-            ->add('plainPassword', PasswordType::class, [
+            ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
+                'type' => PasswordType::class,
                 'attr' => ['autocomplete' => 'new-password'],
+                'first_options' => [
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -84,6 +88,15 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+                'label' => 'New password'
+            ], 
+                'second_options' => [
+                    'label' => 'Repeat again your password',
+                ],
+                'invalid_message' => 'Les mots de passe ne correspondent pas.',
+                // Instead of being set onto the object directly,
+                // this is read and encoded in the controller
+                
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,

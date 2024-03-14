@@ -4,6 +4,7 @@
 
 {% block body %}
 
+{{ include('flash.html.twig') }}
 <h1 class="ps-5 text-center">Profile</h1>
 <div class="row justify-content-center">
 <div class="card w-50">
@@ -14,7 +15,9 @@
     <p class="card-text">Zipcode: {{app.user.zipcode}}</p>
     <p class="card-text">Telephone: {{app.user.telephone}}</p>
     <p class="card-text">E-mail: {{app.user.email}}</p>
-    <a href="#" class="btn btn-primary">Button</a>
+    <a href="{{ path('app_profile_edit')}}" class="btn btn-primary">Modify Profile</a>
+    <a href="{{ path('app_profile_password_edit')}}" class="btn btn-warning">Modify Password</a>
+    <a href="{{ path('app_profile_delete')}}" class="btn btn-danger">Delete Account</a>
   </div>
 </div>
 </div>

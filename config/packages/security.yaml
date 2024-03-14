@@ -17,9 +17,12 @@ security:
             lazy: true
             provider: app_user_provider
             form_login:
-                login_path: app_login
-                check_path: app_login
+                login_path: /login
+                check_path: /login
                 enable_csrf: true
+                default_target_path: /profile
+                target_path_parameter: _target_path
+                #use_referer: true
             logout:
                 path: app_logout
                 # where to redirect after logout

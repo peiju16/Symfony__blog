@@ -22,9 +22,10 @@
         <label for="password">Password</label>
         <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
 
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <input type="hidden" name="_target_path" value="{{ path('app_profile') }}">
+        
+        
 
         {#
             Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.

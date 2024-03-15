@@ -5,11 +5,13 @@ namespace App\Form;
 use App\Entity\Contact;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ContactType extends AbstractType
 {
@@ -35,6 +37,15 @@ class ContactType extends AbstractType
             'row_attr' => ['class' => 'col-md-6', 'id' => '...'],
 
             ])
+        ->add('email', EmailType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter your e-mail',
+                    ]),
+                ],
+                'row_attr' => ['class' => 'col-md-6', 'id' => '...'],
+
+            ])    
         ->add('object', ChoiceType::class, [
                 'label' => 'Sélectionnez un motif',
                 'choices'  => [

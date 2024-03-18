@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommentController!{% endblock %}
+
+{% form_theme commentForm 'bootstrap_5_layout.html.twig' %}
+
+{% block body %}
+   
+			{{ include('flash.html.twig') }}
+
+			{{ form_start(commentForm, { 'attr': {'novalidate': 'novalidate'} }) }}
+	
+		<div class="row g-3 justify-content-center p-5">
+			<div class="col-md-6">
+                <h1 class=>Write your comment for - </h1>
+                <h3> {{article.title}} </h3>
+                {{form_widget(commentForm)}}
+            </div>
+        </div>
+            {# {{ form_row(commentForm._token) }} #}
+            {{form_end(commentForm)}}
+
+{% endblock %}

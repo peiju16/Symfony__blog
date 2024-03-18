@@ -39,19 +39,19 @@ class ContactController extends AbstractController
                 );
 
                 $email = (new TemplatedEmail())
-                ->from($this->getParameter('app.mailAddress'))
-                ->to($this->getParameter('app.mailAddress'))
-                ->cc($contact->getEmail())
-                //->bcc('bcc@example.com')
-                //->replyTo('fabien@example.com')
-                //->priority(Email::PRIORITY_HIGH)
-                ->subject($contact->getObject())
-                ->text('Sending emails is fun again!')
-                // ->html('<p>' . $contact->getMessage() . '</p>');
-                ->htmlTemplate("emails/contact.html.twig")
-                ->context([
-                    'contact' => $contact,
-                ]);
+                    ->from($this->getParameter('app.mailAddress'))
+                    ->to($this->getParameter('app.mailAddress'))
+                    ->cc($contact->getEmail())
+                    //->bcc('bcc@example.com')
+                    //->replyTo('fabien@example.com')
+                    //->priority(Email::PRIORITY_HIGH)
+                    ->subject($contact->getObject())
+                    ->text('Sending emails is fun again!')
+                    // ->html('<p>' . $contact->getMessage() . '</p>');
+                    ->htmlTemplate("emails/contact.html.twig")
+                    ->context([
+                        'contact' => $contact,
+                    ]);
 
                 $mailer->send($email);
 
@@ -63,10 +63,11 @@ class ContactController extends AbstractController
 
             }
 
-         } return $this->render('contact_control/index.html.twig', [
-                'contactForm' => $form,
-                'errors' => !isset($errors) ? NULL : $errors
-            ]);
         }
-
+        return $this->render('contact_control/index.html.twig', [
+            'contactForm' => $form,
+            'errors' => !isset($errors) ? NULL : $errors
+        ]);
     }
+
+}

@@ -27,6 +27,7 @@ class UserType extends AbstractType
             ->add('lastname')
             ->add('city')
             ->add('zipcode')
+            ->add('picture', FileType::class) 
             
         ;
     }

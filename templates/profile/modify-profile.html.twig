@@ -29,6 +29,9 @@
       <div class="col-md-6">
 		{{ form_row(profileForm.telephone) }}
 	</div>
+	    <div class="col-md-6">
+		{{ form_row(profileForm.picture) }}
+	</div>
 
         {# pour sécurité, éviter d'attquer du CSRF #}
         {{ form_row(profileForm._token) }}

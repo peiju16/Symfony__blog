@@ -6,12 +6,17 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Service\ImageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/article')]
 class ArticleController extends AbstractController
@@ -33,13 +38,16 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, ImageService $imageService): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $fileName = $imageService->copyImage("picture", $this->getParameter('article_picture_directory'), $form);
+            $article->setPicture($fileName);
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -80,13 +88,22 @@ class ArticleController extends AbstractController
 
 
     #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Article $article, EntityManagerInterface $entityManager, ImageService $imageService): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
+        //$articlePicture =  $article->getPicture();
+        // $article->setPicture(
+        //     new File($this->getParameter('article_picture_directory').'/'.$article->getPicture())
+        // );
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+
+                $fileName = $imageService->copyImage("picture", $this->getParameter('article_picture_directory'), $form);
+                $article->setPicture($fileName);
+           
+                $entityManager->persist($article);
+                $entityManager->flush();
 
             $this->addFlash(
                 'success',

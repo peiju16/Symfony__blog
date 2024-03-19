@@ -18,13 +18,13 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('firstName',  TextType::class, [
-            //     'constraints' => [
-            //         new NotBlank([
-            //             'message' => 'Please enter your firstname',
-            //         ]),
-            //     ],
-            // ])
+            ->add('firstName',  TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter your firstname',
+                    ]),
+                ],
+            ])
             ->add('content', TextareaType::class, [
                 'constraints' => [
                     new NotBlank([

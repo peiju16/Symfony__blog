@@ -23,8 +23,9 @@
     </div>
   </div>
 </div>
-
+    
     {% for comment in comments %}
+        {% if comment.isVerified %}
 
     <div class="card text-bg-light mb-3">
       <div class="card-header">{{comment.firstName}}</div>
@@ -34,8 +35,10 @@
       </div>
     </div>
 
+         {% endif %}
     {% endfor %}
 
+   
     <a href="{{ path('app_article_index') }}" class="btn btn-primary m-1" role="button">back to list</a>
     {% if app.user and 'ROLE_ADMIN' in app.user.getroles() %}
     <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-primary m-1" role="button">edit</a>

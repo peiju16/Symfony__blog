@@ -48,6 +48,7 @@ class ArticleController extends AbstractController
 
             $fileName = $imageService->copyImage("picture", $this->getParameter('article_picture_directory'), $form);
             $article->setPicture($fileName);
+            
             $entityManager->persist($article);
             $entityManager->flush();
 

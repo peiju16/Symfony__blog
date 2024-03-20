@@ -28,7 +28,7 @@
         {% if comment.isVerified %}
 
     <div class="card text-bg-light mb-3">
-      <div class="card-header">{{comment.firstName}}</div>
+      <div class="card-header">{{comment.firstName}} - User {{comment.user}}</div>
       <div class="card-body">
       <p class="card-text">{{comment.content}}</p>
       <p class="card-text"><small class="text-body-secondary">Date: {{ comment.date ? comment.date|date('Y-m-d') : '' }} </small></p>

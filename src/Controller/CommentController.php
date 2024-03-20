@@ -17,6 +17,7 @@ class CommentController extends AbstractController
     #[Route('/comment/{id_article}', name: 'app_comment', methods: ['GET', 'POST'])]
     public function index(Request $request, EntityManagerInterface $em, int $id_article): Response
     {
+        $user = $this->getUser();
         $article = $em->getRepository(Article::class)->find($id_article);
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -36,12 +37,15 @@ class CommentController extends AbstractController
                 'Your comment has been send'
             );
         }
-    
-        return $this->render('comment/index.html.twig', [
-            'commentForm' => $form,
-            'article' => $article,
-            
-         
-        ]);
+        
+       if ($user) {
+            return $this->render('comment/index.html.twig', [
+                'commentForm' => $form,
+                'article' => $article,  
+            ]);     
+       } else {
+         return $this->redirectToRoute("app_login");
+       }
+     
     }
 }

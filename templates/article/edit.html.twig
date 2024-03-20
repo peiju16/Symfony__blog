@@ -6,11 +6,11 @@
 {% block body %}
     <h1>Edit Article</h1>
 
-    <div class="row">
+    <div class="row g-3">
         <dic class="col-8">
 
-    {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
     {{ include('flash.html.twig') }}
+    {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
     {{ include('article/_delete_form.html.twig') }}
 
     <a href="{{ path('app_article_index') }}" class="btn btn-primary m-1">back to list</a>

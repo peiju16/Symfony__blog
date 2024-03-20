@@ -1,6 +1,28 @@
 {% form_theme articleForm 'bootstrap_5_layout.html.twig' %}
 {{ include('flash.html.twig') }}
 {{ form_start(articleForm) }}
-    {{ form_widget(articleForm) }}
-    <button class="btn btn-primary m-1">{{ button_label|default('Save') }}</button>
-{{ form_end(articleForm) }}
+   <div class="row g-3 p-5">
+        <div class="col-8">
+        <div class="col">
+			{{ form_row(articleForm.title) }}
+		</div>
+        <div class="col">
+			{{ form_row(articleForm.description) }}
+		</div>
+        <div class="col">
+			{{ form_row(articleForm.category) }}
+		</div>
+        <div class="col">
+			{{ form_row(articleForm.picture) }}
+		</div>
+        <div class="col">
+			{% if article.picture %}
+            <img class="col-md-4" src="{{ asset('/uploads/articles/' ~ article.picture)}}" alt="{{article.title}}" title="{{article.title}}">
+            {% endif %}
+		</div>
+            <button class="btn btn-primary m-1">{{ button_label|default('Save') }}</button>
+            
+        </div>
+   </div>
+    
+{{ form_end(articleForm, {render_rest: false}) }}

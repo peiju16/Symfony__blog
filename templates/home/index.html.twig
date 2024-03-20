@@ -6,43 +6,55 @@
 {% block body %}
 
 	{# charger mes catégories #}
-	<div class="d-flex justify-content-between">
+	<div class="row justify-content-between">
 
 		<div class="col-md-3">
-		<ul class="list-group">
-			{% for category in categories %}
-				<li class="list-group-item">
-					<a href="{{path('app_get_article_by_category', { id_category: category.id} )}}">{{category.title}}</li>
-			{% endfor %}
-		</ul>
+			<ul class="list-group">
+				{% for category in categories %}
+					<li class="list-group-item">
+						<a href="{{path('app_get_article_by_category', { id_category: category.id} )}}">{{category.title}}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+
+			<div class="col-md-8">
+
+				<div class="col-md-4 pb-3">
+					<form>
+						<select class="form-select" id="filter" name="filter">
+							<option selected>Open this select menu</option>
+							<option value="asc">
+								Par date croissante</option>
+							<option value="desc">
+								Par date décroissante</option>
+						</select>
+					</form>
+				</div>
+
+				{% for article in articles %}
+					<a href="{{path('app_article_show', { id: article.id} )}}">
+						<div class="article w-100" id="list-articles">
+
+							{% if article.picture is empty %}
+								<img class="col-md-4" src="{{ asset('/uploads/articles/default.png')}}" alt="{{article.title}}" title="{{article.title}}">
+							{% else %}
+								<img class="col-md-4" src="{{ asset('/uploads/articles/' ~ article.picture)}}" alt="{{article.title}}" title="{{article.title}}">
+							{% endif %}
+
+							<div class="col-md-8 d-flex flex-column ms-5 justify-content-center">
+								<h3>{{article.title}}</h3>
+								<p>{{article.description}}</p>
+							</div>
+
+						</div>
+					</a>
+				{% endfor %}
+
+			</div>
 		</div>
-
-		<div class="col-md-8">
-
-			{% for article in articles %}
-			<a href="{{path('app_article_show', { id: article.id} )}}">
-			<div class="article w-100 d-flex">
-
-			{% if article.picture is empty %}
-				<img class="col-md-4" src="{{ asset('/build/images/default.png')}}" alt="{{article.title}}" title="{{article.title}}">
-			{% else %}
-				<img class="col-md-4" src="{{ asset('/build/images/' ~ article.picture)}}" alt="{{article.title}}" title="{{article.title}}">
-			{% endif %}
-
-			<div class="col-md-8 d-flex flex-column ms-5 justify-content-center">
-				<h3>{{article.title}}</h3>
-				<p>{{article.description}}</p>
-			</div>
-
-			</div>
-			</a>
-			{% endfor %}
-
-		</div>	
-	</div>
 
 		<div class="navigation mt-3 d-flex justify-content-center">
-    			{{ knp_pagination_render(articles) }}
+			{{ knp_pagination_render(articles) }}
 		</div>
 
-		{% endblock %}
+	{% endblock %}

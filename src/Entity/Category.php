@@ -87,4 +87,8 @@ class Category
 
         return $this;
     }
+
+      public function __toString() { // quand on affiche sur écran, ça sera le title
+          return $this->title;
+     }
 }

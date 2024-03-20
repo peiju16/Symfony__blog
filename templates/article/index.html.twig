@@ -48,10 +48,10 @@
 		{% if app.user and 'ROLE_ADMIN' in app.user.getroles() %}
 		<a href="{{ path('app_article_new') }}" class="btn btn-primary m-1 col-md-3">Create new</a>
 		{% endif %}
-
+{# 
 		<div class="navigation mt-3 d-flex justify-content-center">
     			{{ knp_pagination_render(articles) }}
-		</div>
+		</div> #}
 
 	</div>
 

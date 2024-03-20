@@ -30,16 +30,8 @@ class ArticleType extends AbstractType
 
                 // unmapped fields can't define their validation using attributes
                 // in the associated entity, so you can use the PHP constraint classes
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/png',
-                            'image/jpeg',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid image type',
-                    ])
-                ],
+                
+                
             ])
             // ...
             ->add('date', null, [
@@ -47,7 +39,8 @@ class ArticleType extends AbstractType
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => 'id',
+                'choice_label' => 'title',
+             
             ])
         ;
     }

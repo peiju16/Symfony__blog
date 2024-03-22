@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+<h1>Profuct index</h1>
+
+	{{ include('flash.html.twig') }}
+
+	<div class="row">
+		{% for product in products %}
+
+
+			<div class="product col-3">
+				<a href="{{path('app_product_show', { id: product.id} )}}">
+
+					{% if product.picture is empty %}
+						<img class="col-md-4" src="{{ asset('/uploads/products/default.png')}}" alt="{{product.name}}" title="{{product.name}}">
+					{% else %}
+						<img class="col-md-4" src="{{ asset('/uploads/products/' ~ product.picture)}}" alt="{{product.name}}" title="{{product.name}}">
+					{% endif %}
+
+					<div class="col-md-4 d-flex flex-column align-items-center text-center ms-2">
+						<h5>{{product.name}}</h3>
+						<p>{{product.description}}</p>
+						<div class="col">
+							<a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-primary m-1">Show</a>
+
+							{% if app.user and 'ROLE_ADMIN' in app.user.getroles() %}
+								<a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-primary m-1">Edit</a>
+							{% endif %}
+						</div>
+					</div>
+				</a>
+			</div>
+
+		{% else %}
+			<tr>
+				<td colspan="6">no records found</td>
+			</tr>
+		{% endfor %}
+
+		{% if app.user and 'ROLE_ADMIN' in app.user.getroles() %}
+		<a href="{{ path('app_product_new') }}" class="btn btn-primary m-1 col-md-3">Create new</a>
+		{% endif %}
+{# 
+		<div class="navigation mt-3 d-flex justify-content-center">
+    			{{ knp_pagination_render(products) }}
+		</div> #}
+
+	</div>
+
+{% endblock %}

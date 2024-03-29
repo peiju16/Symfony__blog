@@ -8,6 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+/**
+ * CategoryController
+ */
 class CategoryController extends AbstractController
 {
     #[Route('/category', name: 'app_category')]
@@ -18,4 +21,5 @@ class CategoryController extends AbstractController
             'categories' => $categories,
         ]);
     }
+
 }

@@ -14,6 +14,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security as SecurityBundleSecurity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -28,7 +29,7 @@ class PaymentController extends AbstractController
         ProductRepository $productRepository,
         EntityManagerInterface $entityManager,
         OrderRepository $orderRepository,
-        Security $security
+        SecurityBundleSecurity $security
     ): Response {
 
         if ($security->isGranted('IS_AUTHENTICATED_FULLY')) {

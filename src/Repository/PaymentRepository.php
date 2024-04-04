@@ -36,13 +36,16 @@ class PaymentRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-       public function findLastPayementByUser($id): ?Payment
-       {
-           return $this->createQueryBuilder('p')
-               ->andWhere('p.id = MAX(ID)')
-               ->setParameter('id', $id)
-               ->getQuery()
-               ->getOneOrNullResult()
-           ;
-       }
+    public function findLastPayementByUser($userId)
+    {
+        $qb = $this->createQueryBuilder('p') 
+            ->where('p.user = :userId')
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(1)
+            ->setParameter('userId', $userId)
+        ;
+        $query = $qb->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
 }
